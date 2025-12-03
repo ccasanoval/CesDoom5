@@ -1,0 +1,77 @@
+[gd_scene load_steps=9 format=3 uid="uid://c6scl4i7qnbw"]
+
+[ext_resource type="PackedScene" uid="uid://dpgkyyasyimnr" path="res://player/ak47.glb" id="1_oul6g"]
+[ext_resource type="Script" uid="uid://ceqsbf3t41vm6" path="res://player/player.gd" id="1_qjkh3"]
+[ext_resource type="Texture2D" uid="uid://civobjvcu78uu" path="res://sprites/crosshair.png" id="2_rkbax"]
+[ext_resource type="Script" uid="uid://cdmr42kieheak" path="res://addons/virtual_joystick/virtual_joystick.gd" id="4_boad6"]
+[ext_resource type="Texture2D" uid="uid://c461n4kf4clf0" path="res://addons/virtual_joystick/resources/textures/joystick_texture_5.png" id="5_rgyib"]
+[ext_resource type="Texture2D" uid="uid://bj6hrb0b3td2p" path="res://addons/virtual_joystick/resources/textures/stick_texture_5.png" id="6_hg6s5"]
+[ext_resource type="Texture2D" uid="uid://clw6k25cd3krs" path="res://addons/virtual_joystick/resources/textures/joystick_texture_2.png" id="7_8t03j"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kqu6x"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_qjkh3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_kqu6x")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+
+[node name="Weapon" parent="Camera3D" instance=ExtResource("1_oul6g")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.4, -0.1, -0.48)
+
+[node name="Crosshair" type="TextureRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -45.0
+offset_right = 45.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+texture = ExtResource("2_rkbax")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="JoystickTrans" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -220.0
+offset_right = 202.0
+offset_bottom = -18.0
+grow_vertical = 0
+pivot_offset = Vector2(110, 110)
+script = ExtResource("4_boad6")
+joystick_texture = ExtResource("5_rgyib")
+stick_texture = ExtResource("6_hg6s5")
+metadata/_custom_type_script = "uid://cdmr42kieheak"
+
+[node name="JoystickRot" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -220.0
+offset_top = -220.0
+offset_right = -18.0
+offset_bottom = -18.0
+grow_horizontal = 0
+grow_vertical = 0
+pivot_offset = Vector2(110, 110)
+script = ExtResource("4_boad6")
+joystick_preset_texture = 2
+joystick_texture = ExtResource("7_8t03j")
+stick_texture = ExtResource("6_hg6s5")
+metadata/_custom_type_script = "uid://cdmr42kieheak"
