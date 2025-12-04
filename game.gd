@@ -3,8 +3,11 @@ extends Node3D
 #RESOURCES:
 #----------
 
-#3D
+#3D Objects
 #https://www.fab.com/listings/1353e155-41de-4f7f-a6a3-a4d6f72b115a
+
+#3D Viewer
+#https://gltf-viewer.donmccurdy.com/
 
 #Textures
 #https://ambientcg.com/list?category=NightSkyHDRISubstance&type=substance&sort=popular

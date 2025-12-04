@@ -13,7 +13,7 @@ config_version=5
 config/name="CesDoom5"
 run/main_scene="uid://iki6u83oxf7b"
 config/features=PackedStringArray("4.5", "Mobile")
-config/icon="res://icon.svg"
+config/icon="uid://vy0p68ke0ug2"
 
 [display]
 

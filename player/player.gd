@@ -46,11 +46,10 @@ func _physics_process(delta: float) -> void:
 		velocity.z = direction.z * SPEED
 		if is_on_floor(): velocity.y = STEP_VELOCITY
 		
-	#### STEPS
-	#if input: #and is_on_floor():
-		
-		
 	move_and_slide()
 
 	#if Input.is_action_pressed("shoot") and %Timer.is_stopped():
 	#	shoot_bullet()
+
+#TODO: Shot : real effect = raycast? && show riffle working
+#TODO: Jump button : to activate jump
