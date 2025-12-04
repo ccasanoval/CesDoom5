@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://clw6k25cd3krs" path="res://addons/virtual_joystick/resources/textures/joystick_texture_2.png" id="7_8t03j"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kqu6x"]
+margin = 0.5
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_qjkh3")
@@ -19,7 +20,7 @@ shape = SubResource("CapsuleShape3D_kqu6x")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0.2)
 
 [node name="Weapon" parent="Camera3D" instance=ExtResource("1_oul6g")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.4, -0.1, -0.48)
@@ -50,7 +51,7 @@ offset_top = -220.0
 offset_right = 202.0
 offset_bottom = -18.0
 grow_vertical = 0
-pivot_offset = Vector2(110, 110)
+pivot_offset = Vector2(101, 101)
 script = ExtResource("4_boad6")
 joystick_texture = ExtResource("5_rgyib")
 stick_texture = ExtResource("6_hg6s5")
@@ -69,7 +70,7 @@ offset_right = -18.0
 offset_bottom = -18.0
 grow_horizontal = 0
 grow_vertical = 0
-pivot_offset = Vector2(110, 110)
+pivot_offset = Vector2(101, 101)
 script = ExtResource("4_boad6")
 joystick_preset_texture = 2
 joystick_texture = ExtResource("7_8t03j")

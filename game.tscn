@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://iki6u83oxf7b"]
+[gd_scene load_steps=11 format=3 uid="uid://iki6u83oxf7b"]
 
 [ext_resource type="Script" uid="uid://mwg771o7mtw6" path="res://game.gd" id="1_7jktm"]
 [ext_resource type="Texture2D" uid="uid://ds81pa5b1a4od" path="res://textures/Rock060_1K-JPG_Color.jpg" id="1_80nbo"]
 [ext_resource type="PackedScene" uid="uid://c6scl4i7qnbw" path="res://player/player.tscn" id="1_e2o6t"]
 [ext_resource type="Texture2D" uid="uid://c8u6x2ovh57aj" path="res://textures/Rock060_1K-JPG_NormalDX.jpg" id="3_fc0e3"]
 [ext_resource type="Texture2D" uid="uid://cjxxgxc0r4ed6" path="res://textures/Rock060_1K-JPG_Roughness.jpg" id="3_feb5d"]
+[ext_resource type="PackedScene" uid="uid://bji2skws55cxp" path="res://world/place1.tscn" id="6_ryrav"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e2o6t"]
 albedo_texture = ExtResource("1_80nbo")
@@ -13,12 +14,24 @@ normal_enabled = true
 normal_texture = ExtResource("3_fc0e3")
 uv1_scale = Vector3(100, 100, 100)
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7jktm"]
+sky_horizon_color = Color(0.98416275, 0.5731662, 0.45479906, 1)
+
+[sub_resource type="Sky" id="Sky_ryrav"]
+sky_material = SubResource("ProceduralSkyMaterial_7jktm")
+
 [sub_resource type="Environment" id="Environment_e2o6t"]
-background_mode = 1
+background_mode = 2
 background_color = Color(0.84736586, 0.22823763, 0.053018503, 1)
+sky = SubResource("Sky_ryrav")
 tonemap_exposure = 2.0
 fog_enabled = true
+fog_mode = 1
 fog_light_color = Color(0.9918172, 0.23314574, 0.14852309, 1)
+fog_light_energy = 5.0
+fog_sun_scatter = 0.2
+fog_density = 1.0
+fog_depth_begin = 30.0
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_7jktm")
@@ -37,3 +50,6 @@ transform = Transform3D(1, 0, 0, 0, 0.8660253, 0.49999997, 0, -0.49999997, 0.866
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_e2o6t")
+
+[node name="Node3D" parent="." instance=ExtResource("6_ryrav")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35, 0, 0)
