@@ -7,6 +7,7 @@ const STEP_VELOCITY = 2.0
 @onready var joyTrans = $JoystickTrans
 @onready var joyRot = $JoystickRot
 
+signal player_hit
 
 func _physics_process(delta: float) -> void:
 	
@@ -53,3 +54,6 @@ func _physics_process(delta: float) -> void:
 
 #TODO: Shot : real effect = raycast? && show riffle working
 #TODO: Jump button : to activate jump
+
+func hit():
+	emit_signal("player_hit")

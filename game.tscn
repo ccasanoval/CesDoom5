@@ -66,3 +66,18 @@ material = SubResource("StandardMaterial3D_e2o6t")
 [node name="Mob" parent="NavigationRegion3D" instance=ExtResource("7_eow3j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -10)
 player_path = NodePath("../../Player")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HitRect" type="ColorRect" parent="UI"]
+visible = false
+layout_mode = 1
+offset_right = 1915.0
+offset_bottom = 1083.0
+color = Color(1, 0.019607844, 0.019607844, 0.29411766)
+
+[connection signal="player_hit" from="Player" to="." method="_on_player_player_hit"]

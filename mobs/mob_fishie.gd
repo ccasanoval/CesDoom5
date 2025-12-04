@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+#signal player_hit
 var player = null
 @export var player_path: NodePath
 @onready var nav_agent = %NavigationAgent3D
@@ -8,7 +9,8 @@ var anim_state_machine
 
 const SPEED = 2.0
 const RANGE_PLAYER_AT_SIGHT = 10
-const RANGE_PLAYER_IS_NEXT = 3
+const RANGE_PLAYER_NOT_AT_SIGHT = 20
+const RANGE_PLAYER_IS_NEXT = 1.75
 
 func _ready() -> void:
 	player = get_node(player_path)
@@ -24,9 +26,10 @@ func _process(delta: float) -> void:
 	### ANIMATIONS	
 	var next = global_position.distance_to(player.global_position) < RANGE_PLAYER_IS_NEXT
 	var sight = global_position.distance_to(player.global_position) < RANGE_PLAYER_AT_SIGHT
+	var not_sight = global_position.distance_to(player.global_position) > RANGE_PLAYER_NOT_AT_SIGHT
 	anim_tree.set("parameters/conditions/player_at_sight", sight)
 	anim_tree.set("parameters/conditions/player_is_next", next)
-	anim_tree.set("parameters/conditions/player_not_at_sight", !sight)
+	anim_tree.set("parameters/conditions/player_not_at_sight", not_sight)
 
 	match anim_state_machine.get_current_node():
 		"Idle_g":
@@ -42,5 +45,8 @@ func _process(delta: float) -> void:
 		"Throw_g":
 			#### HIT
 			look_at(player.global_position, Vector3.UP)
+			await get_tree().create_timer(0.3).timeout
+			if global_position.distance_to(player.global_position) < RANGE_PLAYER_IS_NEXT:
+				player.hit()
 	
 	move_and_slide()
