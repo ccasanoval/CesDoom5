@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://jlyqn3gl6piu"
 path.s3tc="res://.godot/imported/fps_map_ghost_city_45.jpg-e129c8c43680a059b45d92a1fde3f660.s3tc.ctex"
+path.etc2="res://.godot/imported/fps_map_ghost_city_45.jpg-e129c8c43680a059b45d92a1fde3f660.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://world/fps_map_ghost_city_45.jpg"
-dest_files=["res://.godot/imported/fps_map_ghost_city_45.jpg-e129c8c43680a059b45d92a1fde3f660.s3tc.ctex"]
+dest_files=["res://.godot/imported/fps_map_ghost_city_45.jpg-e129c8c43680a059b45d92a1fde3f660.s3tc.ctex", "res://.godot/imported/fps_map_ghost_city_45.jpg-e129c8c43680a059b45d92a1fde3f660.etc2.ctex"]
 
 [params]
 

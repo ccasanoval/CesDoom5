@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://8745f0goimku"]
+
+[ext_resource type="PackedScene" uid="uid://byy42l451xl5l" path="res://world/dirty_leaking_concrete_wall.glb" id="1_fbtni"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_fbtni"]
+points = PackedVector3Array(17.067244, 1.0278503, 5.0697336, -18.976292, 0.81351995, -0.031878024, -20.420967, 1.0278503, -0.22031665, 21.44387, 1.4879173, -0.22031665, 20.05759, 0.56778324, -0.22031665, -20.651316, 1.0278503, 5.0697336, 16.841084, 1.4879173, 5.0697336, -20.651316, 0.79781675, 4.610387, 22.134916, 1.2578838, 5.3004875, 6.718303, 0.79781675, 5.0697336, -14.666437, 0.56778324, 0.24011064, 18.223177, 1.4879173, 0.009896994, 22.134916, 1.0278503, 0.009896994, 22.134916, 1.4879173, 0.009896994, -18.762558, 0.81812596, 4.846396, 16.841084, 1.4879173, 4.1499596, 19.82724, 1.2578838, 5.3004875, 21.213522, 0.79781675, 0.009896994, 17.758291, 1.4879173, 0.93021107, 20.983173, 1.4879173, -0.22031665)
+
+[node name="Wall" instance=ExtResource("1_fbtni")]
+
+[node name="Sketchfab_model" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 2.220446e-16, 1, 0, -1, 2.220446e-16, 0, -0.3, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Sketchfab_model/8dc65e4c628e4d3eaef026de67f9f0c6_fbx/RootNode/btn_krnl/btn_krnl_btn_krnl_u1_v1_0" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sketchfab_model/8dc65e4c628e4d3eaef026de67f9f0c6_fbx/RootNode/btn_krnl/btn_krnl_btn_krnl_u1_v1_0/StaticBody3D" index="0"]
+shape = SubResource("ConvexPolygonShape3D_fbtni")

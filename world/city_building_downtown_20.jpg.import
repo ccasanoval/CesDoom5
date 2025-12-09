@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://d3wj2uahvye3p"
 path.s3tc="res://.godot/imported/city_building_downtown_20.jpg-4f45fdbe8029c46b97c7e41eb6437ffd.s3tc.ctex"
+path.etc2="res://.godot/imported/city_building_downtown_20.jpg-4f45fdbe8029c46b97c7e41eb6437ffd.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://world/city_building_downtown_20.jpg"
-dest_files=["res://.godot/imported/city_building_downtown_20.jpg-4f45fdbe8029c46b97c7e41eb6437ffd.s3tc.ctex"]
+dest_files=["res://.godot/imported/city_building_downtown_20.jpg-4f45fdbe8029c46b97c7e41eb6437ffd.s3tc.ctex", "res://.godot/imported/city_building_downtown_20.jpg-4f45fdbe8029c46b97c7e41eb6437ffd.etc2.ctex"]
 
 [params]
 

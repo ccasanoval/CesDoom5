@@ -1,15 +1,37 @@
-[gd_scene load_steps=9 format=3 uid="uid://c6scl4i7qnbw"]
+[gd_scene load_steps=16 format=3 uid="uid://c6scl4i7qnbw"]
 
-[ext_resource type="PackedScene" uid="uid://dpgkyyasyimnr" path="res://player/ak47.glb" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://ceqsbf3t41vm6" path="res://player/player.gd" id="1_qjkh3"]
 [ext_resource type="Texture2D" uid="uid://civobjvcu78uu" path="res://sprites/crosshair.png" id="2_rkbax"]
+[ext_resource type="ArrayMesh" uid="uid://dvv7sex6gcqhs" path="res://player/flash/muzzleflash.obj" id="3_2ieo8"]
 [ext_resource type="Script" uid="uid://cdmr42kieheak" path="res://addons/virtual_joystick/virtual_joystick.gd" id="4_boad6"]
+[ext_resource type="Texture2D" uid="uid://blk3hwp30huof" path="res://player/flash/muzzleflash.png" id="4_ebec5"]
 [ext_resource type="Texture2D" uid="uid://c461n4kf4clf0" path="res://addons/virtual_joystick/resources/textures/joystick_texture_5.png" id="5_rgyib"]
 [ext_resource type="Texture2D" uid="uid://bj6hrb0b3td2p" path="res://addons/virtual_joystick/resources/textures/stick_texture_5.png" id="6_hg6s5"]
 [ext_resource type="Texture2D" uid="uid://clw6k25cd3krs" path="res://addons/virtual_joystick/resources/textures/joystick_texture_2.png" id="7_8t03j"]
+[ext_resource type="Texture2D" uid="uid://cft5bsatsh8i" path="res://icon/up-arrow.png" id="8_hg6s5"]
+[ext_resource type="PackedScene" uid="uid://b8ydsnh6bfvxt" path="res://player/akm.glb" id="8_rgyib"]
+[ext_resource type="Texture2D" uid="uid://dc2jq504jx6vs" path="res://icon/bullet.png" id="9_hg6s5"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kqu6x"]
 margin = 0.5
+radius = 0.55
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yllr7"]
+blend_mode = 1
+cull_mode = 2
+depth_draw_mode = 2
+shading_mode = 0
+disable_ambient_light = true
+disable_fog = true
+disable_specular_occlusion = true
+albedo_texture = ExtResource("4_ebec5")
+disable_receive_shadows = true
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_8t03j"]
+diffuse_texture = ExtResource("8_hg6s5")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_2ieo8"]
+diffuse_texture = ExtResource("9_hg6s5")
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_qjkh3")
@@ -22,8 +44,20 @@ shape = SubResource("CapsuleShape3D_kqu6x")
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0.2)
 
-[node name="Weapon" parent="Camera3D" instance=ExtResource("1_oul6g")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.4, -0.1, -0.48)
+[node name="AKM" parent="Camera3D" instance=ExtResource("8_rgyib")]
+transform = Transform3D(-1.7484555e-10, 0, 0.004, 0, 0.004, 0, -0.004, 0, -1.7484555e-10, 0.3, -0.2, -0.075)
+
+[node name="MuzzleFlash" type="MeshInstance3D" parent="Camera3D/AKM"]
+transform = Transform3D(-4.371138e-07, 0, -10, 0, 10, 0, 10, 0, -4.371138e-07, 169.81308, 18.923523, 7.6293945e-06)
+visible = false
+mesh = ExtResource("3_2ieo8")
+surface_material_override/0 = SubResource("StandardMaterial3D_yllr7")
+surface_material_override/1 = SubResource("StandardMaterial3D_yllr7")
+surface_material_override/2 = SubResource("StandardMaterial3D_yllr7")
+
+[node name="Flash" type="OmniLight3D" parent="Camera3D/AKM"]
+transform = Transform3D(249.99998, 0, 9.094947e-13, 0, 249.99998, 0, -9.094947e-13, 0, 249.99998, 170.63695, 18.979675, 7.6293945e-06)
+visible = false
 
 [node name="Crosshair" type="TextureRect" parent="."]
 anchors_preset = 8
@@ -47,12 +81,15 @@ layout_mode = 3
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -220.0
-offset_right = 202.0
-offset_bottom = -18.0
+offset_left = 104.0
+offset_top = -308.0
+offset_right = 306.0
+offset_bottom = -106.0
 grow_vertical = 0
+scale = Vector2(2, 2)
 pivot_offset = Vector2(101, 101)
 script = ExtResource("4_boad6")
+scale_factor = 2.0
 joystick_texture = ExtResource("5_rgyib")
 stick_texture = ExtResource("6_hg6s5")
 metadata/_custom_type_script = "uid://cdmr42kieheak"
@@ -64,15 +101,31 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -220.0
-offset_top = -220.0
-offset_right = -18.0
-offset_bottom = -18.0
+offset_left = -302.0
+offset_top = -304.0
+offset_right = -100.0
+offset_bottom = -102.0
 grow_horizontal = 0
 grow_vertical = 0
+scale = Vector2(2, 2)
 pivot_offset = Vector2(101, 101)
 script = ExtResource("4_boad6")
+scale_factor = 2.0
 joystick_preset_texture = 2
 joystick_texture = ExtResource("7_8t03j")
 stick_texture = ExtResource("6_hg6s5")
 metadata/_custom_type_script = "uid://cdmr42kieheak"
+
+[node name="JumpButton" type="TouchScreenButton" parent="."]
+modulate = Color(1, 1, 1, 0.39215687)
+position = Vector2(300, 546)
+scale = Vector2(0.051025387, 0.04492193)
+texture_normal = SubResource("CanvasTexture_8t03j")
+action = "jump"
+
+[node name="FireButton" type="TouchScreenButton" parent="."]
+modulate = Color(1, 1, 1, 0.47058824)
+position = Vector2(1419.0001, 573)
+scale = Vector2(0.09402488, 0.04059487)
+texture_normal = SubResource("CanvasTexture_2ieo8")
+action = "fire"

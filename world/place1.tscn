@@ -15,9 +15,9 @@ uv1_scale = Vector3(10, 10, 10)
 [node name="Node3D" type="Node3D"]
 
 [node name="Asphalt" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09643555, -1.0000076, -0.07306099)
-size = Vector3(300, 1, 300)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+size = Vector3(60, 1, 60)
 material = SubResource("StandardMaterial3D_hpgqm")
 
 [node name="Sketchfab_Scene" parent="." instance=ExtResource("4_igmud")]
-transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 0, 0.5, -10)
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 0, 0.5, 0)
