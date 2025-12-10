@@ -252,6 +252,10 @@ player_path = NodePath("../../../Player")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 111.28011, 0, -112.92383)
 player_path = NodePath("../../../Player")
 
+[node name="Mob7" parent="NavigationRegion3D/Mobs" instance=ExtResource("7_eow3j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 174.73691, 0, -79.647705)
+player_path = NodePath("../../../Player")
+
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0

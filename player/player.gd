@@ -10,11 +10,13 @@ const STEP_VELOCITY = 2.0
 @onready var muzzleFlash = $Camera3D/AKM/MuzzleFlash
 @onready var flash = $Camera3D/AKM/Flash
 
+const FIRE_RAY_LENGTH = 9000
 const FIRERATE = 0.09
-var cooldown := FIRERATE
+var fireCooldown := FIRERATE
 
 signal player_hit
 
+#----------------------------------------------------------------------------------------
 func _physics_process(delta: float) -> void:
 	
 	#### GRAVITY
@@ -26,15 +28,12 @@ func _physics_process(delta: float) -> void:
 		velocity.y = JUMP_VELOCITY
 		
 	#### FIRE
-	cooldown += delta
-	if cooldown > FIRERATE*9/10:
+	fireCooldown += delta
+	if fireCooldown > FIRERATE*8/10:
 		flash.visible = false
 		muzzleFlash.visible = false
-	if Input.is_action_pressed("fire") and cooldown > FIRERATE:
-		cooldown = 0
-		flash.visible = true
-		muzzleFlash.visible = true
-		#TODO:Check direction, trace ray, kill mobs
+	if Input.is_action_pressed("fire") and fireCooldown > FIRERATE:
+		fire()
 	
 	#### KEYBOARD
 	# Get the input direction and handle the movement/deceleration.
@@ -71,5 +70,29 @@ func _physics_process(delta: float) -> void:
 
 #TODO: Animacion fuego: https://www.youtube.com/watch?v=ERFCutI6mqc
 
+#----------------------------------------------------------------------------------------
+func fire():
+	fireCooldown = 0
+	flash.visible = true
+	muzzleFlash.visible = true
+	
+	var space_state = get_world_3d().direct_space_state
+	var cam = $Camera3D
+	var crosshair = $Crosshair.global_position
+
+	var origin = cam.project_ray_origin(crosshair)
+	var end = origin + cam.project_ray_normal(crosshair) * FIRE_RAY_LENGTH
+	var query = PhysicsRayQueryParameters3D.create(origin, end)
+	query.collide_with_areas = true
+	query.collide_with_bodies = true
+	query.hit_back_faces = true
+
+	var result = space_state.intersect_ray(query)
+	if result:
+		var collider = result.get("collider")
+		if collider is CharacterBody3D: collider.hit()
+		print("Hit at point: ", result.position)
+
+#----------------------------------------------------------------------------------------
 func hit():
 	emit_signal("player_hit")

@@ -5,7 +5,10 @@ var player = null
 @export var player_path: NodePath
 @onready var nav_agent = %NavigationAgent3D
 @onready var anim_tree = %AnimationTree
+@onready var timer = $Timer
 var anim_state_machine
+
+var health = 100
 
 const SPEED = 2.0
 const RANGE_PLAYER_AT_SIGHT = 10
@@ -27,6 +30,10 @@ func _process(delta: float) -> void:
 	var next = global_position.distance_to(player.global_position) < RANGE_PLAYER_IS_NEXT
 	var sight = global_position.distance_to(player.global_position) < RANGE_PLAYER_AT_SIGHT
 	var not_sight = global_position.distance_to(player.global_position) > RANGE_PLAYER_NOT_AT_SIGHT
+	if !timer.is_stopped():
+		next = false
+		sight = false
+		not_sight = true
 	anim_tree.set("parameters/conditions/player_at_sight", sight)
 	anim_tree.set("parameters/conditions/player_is_next", next)
 	anim_tree.set("parameters/conditions/player_not_at_sight", not_sight)
@@ -50,3 +57,16 @@ func _process(delta: float) -> void:
 				player.hit()
 	
 	move_and_slide()
+
+func hit():
+	health -= 10
+	print("Awww, I get hit")
+	$OmniLight3D.visible = true
+	timer.connect("timeout", _on_timer_timeout)
+	timer.start(1)
+	
+func _on_timer_timeout():
+	print("Ok, I'm better now")
+	$OmniLight3D.visible = false
+	pass
+	
