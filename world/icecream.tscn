@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bgjba74jawv7r"]
-
-[ext_resource type="PackedScene" uid="uid://c8ca2u0w7tmo2" path="res://world/city_building_downtown.glb" id="1_6u1do"]
-
-[node name="IceCreamFactory" instance=ExtResource("1_6u1do")]
-
-[node name="Sketchfab_model" parent="." index="0"]
-transform = Transform3D(0.03, 0, 0, 0, -1.3113416e-09, 0.03, 0, -0.03, -1.3113416e-09, 0, -0.5, 0)

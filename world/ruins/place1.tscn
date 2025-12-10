@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://bji2skws55cxp"]
+
+[ext_resource type="Texture2D" uid="uid://b7osxlqvum2o8" path="res://textures/Asphalt021_1K-JPG_Color.jpg" id="1_kkxug"]
+[ext_resource type="Texture2D" uid="uid://7n4rl81xp1vn" path="res://textures/Asphalt021_1K-JPG_NormalGL.jpg" id="2_igmud"]
+[ext_resource type="Texture2D" uid="uid://drtad4itkj1nx" path="res://textures/Asphalt021_1K-JPG_Roughness.jpg" id="3_aswmi"]
+[ext_resource type="PackedScene" uid="uid://dcmrrkngkwcft" path="res://world/ruins.tscn" id="4_igmud"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hpgqm"]
+albedo_texture = ExtResource("1_kkxug")
+roughness_texture = ExtResource("3_aswmi")
+normal_enabled = true
+normal_texture = ExtResource("2_igmud")
+uv1_scale = Vector3(10, 10, 10)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Asphalt" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+size = Vector3(60, 1, 60)
+material = SubResource("StandardMaterial3D_hpgqm")
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("4_igmud")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 0, 0.5, 0)
