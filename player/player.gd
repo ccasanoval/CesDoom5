@@ -76,22 +76,11 @@ func fire():
 	flash.visible = true
 	muzzleFlash.visible = true
 	
-	var space_state = get_world_3d().direct_space_state
-	var cam = $Camera3D
-	var crosshair = $Crosshair.global_position
-
-	var origin = cam.project_ray_origin(crosshair)
-	var end = origin + cam.project_ray_normal(crosshair) * FIRE_RAY_LENGTH
-	var query = PhysicsRayQueryParameters3D.create(origin, end)
-	query.collide_with_areas = true
-	query.collide_with_bodies = true
-	query.hit_back_faces = true
-
-	var result = space_state.intersect_ray(query)
-	if result:
-		var collider = result.get("collider")
+	var ray = $Camera3D/RayCast3D
+	if ray.is_colliding():
+		var collider = ray.get_collider()
 		if collider is CharacterBody3D: collider.hit()
-		print("Hit at point: ", result.position)
+		print("Collided at ", collider)
 
 #----------------------------------------------------------------------------------------
 func hit():

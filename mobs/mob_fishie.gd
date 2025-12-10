@@ -22,6 +22,13 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	velocity = Vector3.ZERO
 	
+	#### DIYING
+	if health < 5:
+		rotate_object_local(Vector3.LEFT, delta)
+		if rotation.x < -1.5: queue_free()
+		#TODO: Add points to player?
+		return
+	
 	#### GRAVITY
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -59,14 +66,16 @@ func _process(delta: float) -> void:
 	move_and_slide()
 
 func hit():
-	health -= 10
 	print("Awww, I get hit")
 	$OmniLight3D.visible = true
+	$OmniLight3D2.visible = true
 	timer.connect("timeout", _on_timer_timeout)
-	timer.start(1)
+	timer.start(.5)
+	health -= 5
 	
 func _on_timer_timeout():
-	print("Ok, I'm better now")
+	print("Ok, I'm better now. Health = ", health)
 	$OmniLight3D.visible = false
+	$OmniLight3D2.visible = false
 	pass
 	

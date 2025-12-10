@@ -59,6 +59,10 @@ surface_material_override/2 = SubResource("StandardMaterial3D_yllr7")
 transform = Transform3D(249.99998, 0, 9.094947e-13, 0, 249.99998, 0, -9.094947e-13, 0, 249.99998, 170.63695, 18.979675, 7.6293945e-06)
 visible = false
 
+[node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0, 0, 0)
+target_position = Vector3(0, -100, 0)
+
 [node name="Crosshair" type="TextureRect" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
