@@ -2,21 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lxox4oi0onrl"
-path.s3tc="res://.godot/imported/fishie_vgdc_4.png-e6c9751d6bb6368f84d290f6af9cc655.s3tc.ctex"
-path.etc2="res://.godot/imported/fishie_vgdc_4.png-e6c9751d6bb6368f84d290f6af9cc655.etc2.ctex"
+uid="uid://boytrloduis8p"
+path.s3tc="res://.godot/imported/fishie_vgdc_5.png-7e22a50d3f556fad29607f0f755f53b8.s3tc.ctex"
+path.etc2="res://.godot/imported/fishie_vgdc_5.png-7e22a50d3f556fad29607f0f755f53b8.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "1c16107d1dbeebcbb1e0bafe06966273"
+"md5": "1b7738fca0c6d80242beffcbfe397216"
 }
 
 [deps]
 
-source_file="res://mobs/fishie_vgdc_4.png"
-dest_files=["res://.godot/imported/fishie_vgdc_4.png-e6c9751d6bb6368f84d290f6af9cc655.s3tc.ctex", "res://.godot/imported/fishie_vgdc_4.png-e6c9751d6bb6368f84d290f6af9cc655.etc2.ctex"]
+source_file="res://mobs/fishie/fishie_vgdc_5.png"
+dest_files=["res://.godot/imported/fishie_vgdc_5.png-7e22a50d3f556fad29607f0f755f53b8.s3tc.ctex", "res://.godot/imported/fishie_vgdc_5.png-7e22a50d3f556fad29607f0f755f53b8.etc2.ctex"]
 
 [params]
 
@@ -26,12 +26,12 @@ compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
-compress/normal_map=0
+compress/normal_map=1
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
-roughness/mode=0
-roughness/src_normal=""
+roughness/mode=1
+roughness/src_normal="res://mobs/fishie_vgdc_5.png"
 process/channel_remap/red=0
 process/channel_remap/green=1
 process/channel_remap/blue=2

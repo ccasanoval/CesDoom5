@@ -97,5 +97,7 @@ func fire():
 
 #----------------------------------------------------------------------------------------
 #TODO: Detect contact with mob bullets and have pain, discount health and if < 0, die
-func hit():
+func hit(damage):
+	health -= damage
+	print("Player hurt! H=", health)
 	emit_signal("player_hit")

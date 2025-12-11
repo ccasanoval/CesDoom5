@@ -18,13 +18,13 @@ extends Node3D
 #Tutorial
 #https://www.gdquest.com/library/first_3d_game_godot4_arena_fps/#creating-the-level
 
-#TODO: Enhance the ilumination and environment
-#TODO: Android (fire + activate) button, jump button
-#TODO: Fire weapon action: check mob health, fire animation, fire sound
-#TODO: Activate action: over vehicle or switch
+#TODO: Enhance the ilumination and environment, fog, etc
+#TODO: Sounds
+#TODO: Ride motorbike or vehicle
 #TODO: Other mobs that spawn with time and follow the player
 #TODO: Mobs can fire at player when they are near...
 #TODO: Health bar, and health kits for player to activate
+#TODO: Ammo limit, and magazines to pick up
 
 #TODO: Create the ship, when bomb activated, player will jump in and run away
 #TODO: When activating the bomb switch, player must find the ship and run away

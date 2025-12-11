@@ -50,11 +50,8 @@ func _process(delta: float) -> void:
 		var collider = ray.get_collider()
 		if collider != null and collider.is_in_group("Player"):
 			#TODO: Look ant player
-			is_firing = true
 			is_firing_now = true
-			timerFire.connect("timeout", _on_timer_fire_timeout)
-			timerFire.start(5)
-			print("I gocha")
+			fire()
 
 	anim_tree.set("parameters/conditions/at_fire_range", is_firing_now)
 	anim_tree.set("parameters/conditions/player_at_sight", sight)
@@ -77,7 +74,7 @@ func _process(delta: float) -> void:
 			look_at(player.global_position, Vector3.UP)
 			await get_tree().create_timer(0.3).timeout
 			if global_position.distance_to(player.global_position) < RANGE_PLAYER_IS_NEXT:
-				player.hit()
+				player.hit(delta)
 	
 	move_and_slide()
 
@@ -93,8 +90,20 @@ func _on_timer_hit_timeout():
 	print("Ok, I'm better now. Health = ", health)
 	$OmniLight3D.visible = false
 	$OmniLight3D2.visible = false
-	
+
+func fire():
+	print("Fire!!")
+	is_firing = true
+	timerFire.connect("timeout", _on_timer_fire_timeout)
+	timerFire.start(5)
+	# Create bullet
+	await get_tree().create_timer(0.3).timeout
+	const BULLET_3D = preload("res://mobs/bullet/bullet_3d.tscn")
+	var new_bullet = BULLET_3D.instantiate()
+	$FireMarker.add_child(new_bullet)
+	new_bullet.global_transform = $FireMarker.global_transform
+		
 func _on_timer_fire_timeout():
-	print("Weapon reloaded")
+	print("Fire ready again")
 	is_firing = false
 	anim_tree.set("parameters/conditions/at_fire_range", false)

@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://fne5n3ccakbq"
-path="res://.godot/imported/fishie_vgdc.glb-aecfccdc254f8637ddf7ed4e98e4d143.scn"
+path="res://.godot/imported/fishie_vgdc.glb-cb0a19d8b39544c7fba3c9ad39bed749.scn"
 
 [deps]
 
-source_file="res://mobs/fishie_vgdc.glb"
-dest_files=["res://.godot/imported/fishie_vgdc.glb-aecfccdc254f8637ddf7ed4e98e4d143.scn"]
+source_file="res://mobs/fishie/fishie_vgdc.glb"
+dest_files=["res://.godot/imported/fishie_vgdc.glb-cb0a19d8b39544c7fba3c9ad39bed749.scn"]
 
 [params]
 
