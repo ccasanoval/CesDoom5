@@ -4,17 +4,22 @@ const SPEED = 5.0
 const JUMP_VELOCITY = 5.5
 const STEP_VELOCITY = 2.0
 
+const FIRE_RAY_LENGTH = 9000
+const FIRERATE = 0.09
+var fireCooldown := FIRERATE
+
+var hasSetTheBomb = false
+
 @onready var joyTrans = $JoystickTrans
 @onready var joyRot = $JoystickRot
 @onready var jumpButton = $JumpButton
 @onready var muzzleFlash = $Camera3D/AKM/MuzzleFlash
 @onready var flash = $Camera3D/AKM/Flash
 
-const FIRE_RAY_LENGTH = 9000
-const FIRERATE = 0.09
-var fireCooldown := FIRERATE
-
+var health = 100
 signal player_hit
+
+#TODO: Ride motorcycle or car... Touch -> Ride -> Change mode, change view...
 
 #----------------------------------------------------------------------------------------
 func _physics_process(delta: float) -> void:
@@ -34,6 +39,13 @@ func _physics_process(delta: float) -> void:
 		muzzleFlash.visible = false
 	if Input.is_action_pressed("fire") and fireCooldown > FIRERATE:
 		fire()
+		
+	#### TOUCH
+	var rayTouch = $Camera3D/RayCastTouch
+	if rayTouch.is_colliding():
+		var collider = rayTouch.get_collider()
+		print(collider)
+
 	
 	#### KEYBOARD
 	# Get the input direction and handle the movement/deceleration.
@@ -65,12 +77,10 @@ func _physics_process(delta: float) -> void:
 		
 	move_and_slide()
 
-	#if Input.is_action_pressed("shoot") and %Timer.is_stopped():
-	#	shoot_bullet()
-
-#TODO: Animacion fuego: https://www.youtube.com/watch?v=ERFCutI6mqc
-
 #----------------------------------------------------------------------------------------
+#Fire shot animation: https://www.youtube.com/watch?v=ERFCutI6mqc
+#TODO: Discount number of available bullets
+#TODO: Add magazin picking to get more available bullets
 func fire():
 	fireCooldown = 0
 	flash.visible = true

@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://drpbumcf48c4p"]
+
+[ext_resource type="PackedScene" uid="uid://bx5ibc703yh3l" path="res://vehicle/sci_fi_mobile_teleporter.glb" id="1_qblkn"]
+
+[node name="Teleporter" instance=ExtResource("1_qblkn")]

@@ -63,6 +63,10 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0, 0, 0)
 target_position = Vector3(0, -100, 0)
 
+[node name="RayCastTouch" type="RayCast3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 0.7071067, -0.7071067, 0, 0.7071067, 0.7071067, 0, 0, 0)
+target_position = Vector3(0, -3, 0)
+
 [node name="Crosshair" type="TextureRect" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
