@@ -44,8 +44,11 @@ func _physics_process(delta: float) -> void:
 	var rayTouch = $Camera3D/RayCastTouch
 	if rayTouch.is_colliding():
 		var collider = rayTouch.get_collider()
-		print(collider)
-
+		if collider != null and collider.is_in_group("Teleporter"):
+			collider.teleport()
+		if collider != null and collider.is_in_group("Activate"):
+			#TODO: Change weapon by hand to let the user touch and activate with a menu?...
+			collider.activate()
 	
 	#### KEYBOARD
 	# Get the input direction and handle the movement/deceleration.
@@ -85,13 +88,14 @@ func fire():
 	fireCooldown = 0
 	flash.visible = true
 	muzzleFlash.visible = true
-	
 	var ray = $Camera3D/RayCast3D
 	if ray.is_colliding():
 		var collider = ray.get_collider()
-		if collider is CharacterBody3D: collider.hit()
+		#if collider is CharacterBody3D: collider.hit()
+		if collider != null and collider.is_in_group("Mob"): collider.hit()
 		print("Collided at ", collider)
 
 #----------------------------------------------------------------------------------------
+#TODO: Detect contact with mob bullets and have pain, discount health and if < 0, die
 func hit():
 	emit_signal("player_hit")

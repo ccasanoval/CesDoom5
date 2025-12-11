@@ -5,8 +5,11 @@ var player = null
 @export var player_path: NodePath
 @onready var nav_agent = %NavigationAgent3D
 @onready var anim_tree = %AnimationTree
-@onready var timer = $Timer
+@onready var timerHit = $TimerHit
+@onready var timerFire = $TimerFire
+@onready var ray = $RayCast3D
 var anim_state_machine
+var is_firing = false
 
 var health = 100
 
@@ -37,10 +40,23 @@ func _process(delta: float) -> void:
 	var next = global_position.distance_to(player.global_position) < RANGE_PLAYER_IS_NEXT
 	var sight = global_position.distance_to(player.global_position) < RANGE_PLAYER_AT_SIGHT
 	var not_sight = global_position.distance_to(player.global_position) > RANGE_PLAYER_NOT_AT_SIGHT
-	if !timer.is_stopped():
+	if !timerHit.is_stopped():
 		next = false
 		sight = false
 		not_sight = true
+
+	var is_firing_now = false
+	if !next and !is_firing and ray.is_colliding():
+		var collider = ray.get_collider()
+		if collider != null and collider.is_in_group("Player"):
+			#TODO: Look ant player
+			is_firing = true
+			is_firing_now = true
+			timerFire.connect("timeout", _on_timer_fire_timeout)
+			timerFire.start(5)
+			print("I gocha")
+
+	anim_tree.set("parameters/conditions/at_fire_range", is_firing_now)
 	anim_tree.set("parameters/conditions/player_at_sight", sight)
 	anim_tree.set("parameters/conditions/player_is_next", next)
 	anim_tree.set("parameters/conditions/player_not_at_sight", not_sight)
@@ -69,13 +85,16 @@ func hit():
 	print("Awww, I get hit")
 	$OmniLight3D.visible = true
 	$OmniLight3D2.visible = true
-	timer.connect("timeout", _on_timer_timeout)
-	timer.start(.5)
+	timerHit.connect("timeout", _on_timer_hit_timeout)
+	timerHit.start(.5)
 	health -= 5
 	
-func _on_timer_timeout():
+func _on_timer_hit_timeout():
 	print("Ok, I'm better now. Health = ", health)
 	$OmniLight3D.visible = false
 	$OmniLight3D2.visible = false
-	pass
 	
+func _on_timer_fire_timeout():
+	print("Weapon reloaded")
+	is_firing = false
+	anim_tree.set("parameters/conditions/at_fire_range", false)

@@ -33,7 +33,7 @@ diffuse_texture = ExtResource("8_hg6s5")
 [sub_resource type="CanvasTexture" id="CanvasTexture_2ieo8"]
 diffuse_texture = ExtResource("9_hg6s5")
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
 script = ExtResource("1_qjkh3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
