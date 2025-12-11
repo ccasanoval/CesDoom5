@@ -20,16 +20,19 @@ extends Node3D
 
 #TODO: Enhance the ilumination and environment, fog, etc
 #TODO: Sounds
-#TODO: Ride motorbike or vehicle
 #TODO: Other mobs that spawn with time and follow the player
-#TODO: Mobs can fire at player when they are near...
 #TODO: Health bar, and health kits for player to activate
 #TODO: Ammo limit, and magazines to pick up
+#TODO: Ride motorcycle or car... Touch -> Ride -> Change mode, change view...
+#TODO: Add door in bomb room so player must find the key?
 
-#TODO: Create the ship, when bomb activated, player will jump in and run away
-#TODO: When activating the bomb switch, player must find the ship and run away
+#TODO: When bomb activated, teleporter gets activated and player can jump in and run away
+
 
 @onready var hit_rect = $UI/HitRect
+@onready var message = %Message
+
+var bomb_activated = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -39,8 +42,24 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-
 func _on_player_player_hit() -> void:
 	hit_rect.visible = true
 	await get_tree().create_timer(0.3).timeout
 	hit_rect.visible = false
+
+func _on_player_bomb_activated() -> void:
+	bomb_activated = true
+	message.text = "Bomb activated!\nRun to a teleporter"
+	message.visible = true
+	await get_tree().create_timer(2).timeout
+	message.visible = false
+
+func _on_player_teleporter_activated() -> void:
+	if bomb_activated:
+		message.text = "Teleport in process\nPrepare for your next mission"
+		#TODO: Next game!!!
+	else:
+		message.text = "Teleport denied.\nComplete the mission:\nActivate the bomb"
+	message.visible = true
+	await get_tree().create_timer(2).timeout
+	message.visible = false

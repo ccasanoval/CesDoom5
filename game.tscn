@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://iki6u83oxf7b"]
+[gd_scene load_steps=22 format=3 uid="uid://iki6u83oxf7b"]
 
 [ext_resource type="Script" uid="uid://mwg771o7mtw6" path="res://game.gd" id="1_7jktm"]
 [ext_resource type="Texture2D" uid="uid://ds81pa5b1a4od" path="res://textures/Rock060_1K-JPG_Color.jpg" id="1_80nbo"]
@@ -6,13 +6,14 @@
 [ext_resource type="Texture2D" uid="uid://c8u6x2ovh57aj" path="res://textures/Rock060_1K-JPG_NormalDX.jpg" id="3_fc0e3"]
 [ext_resource type="Texture2D" uid="uid://cjxxgxc0r4ed6" path="res://textures/Rock060_1K-JPG_Roughness.jpg" id="3_feb5d"]
 [ext_resource type="PackedScene" uid="uid://bji2skws55cxp" path="res://world/ruins/place1.tscn" id="6_ryrav"]
-[ext_resource type="PackedScene" uid="uid://boclw7y216rgu" path="res://mobs/mob_fishie.tscn" id="7_eow3j"]
+[ext_resource type="PackedScene" uid="uid://boclw7y216rgu" path="res://mobs/fishie/mob_fishie.tscn" id="7_eow3j"]
 [ext_resource type="PackedScene" uid="uid://cx6xvobpy240n" path="res://world/warehouse/warehouse.tscn" id="8_j5wjh"]
 [ext_resource type="PackedScene" uid="uid://dao3tmako21ic" path="res://world/exhaust/steam_exhaust.tscn" id="9_vef74"]
 [ext_resource type="PackedScene" uid="uid://gycori6pye8d" path="res://world/city/city.tscn" id="11_mfdv2"]
 [ext_resource type="PackedScene" uid="uid://cr4tl2ec5emaf" path="res://world/wall/wall.tscn" id="12_iotsf"]
 [ext_resource type="PackedScene" uid="uid://drpbumcf48c4p" path="res://vehicle/teleporter.tscn" id="12_lc2xo"]
 [ext_resource type="PackedScene" uid="uid://w0amt4hayt83" path="res://world/houston/houston.tscn" id="13_lc2xo"]
+[ext_resource type="PackedScene" uid="uid://0fh8oibcp460" path="res://world/bomb/bomb.tscn" id="14_215e1"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7jktm"]
 sky_horizon_color = Color(0.98416275, 0.5731662, 0.45479906, 1)
@@ -43,6 +44,15 @@ roughness_texture = ExtResource("3_feb5d")
 normal_enabled = true
 normal_texture = ExtResource("3_fc0e3")
 uv1_scale = Vector3(100, 100, 100)
+
+[sub_resource type="SystemFont" id="SystemFont_215e1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7sc4i"]
+font = SubResource("SystemFont_215e1")
+font_size = 42
+font_color = Color(0.19607843, 1, 0.19607843, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0.007843138, 1)
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_7jktm")
@@ -86,7 +96,7 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -25,
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -25, 0, -122.09055)
 
 [node name="City" parent="NavigationRegion3D" instance=ExtResource("11_mfdv2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 79.343445, 0, -87.89926)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 79.343, 0, -87.899)
 
 [node name="Exhaust" type="Node3D" parent="NavigationRegion3D"]
 
@@ -273,7 +283,10 @@ transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, 
 transform = Transform3D(0.99996996, 0.007749184, 0, -0.007749184, 0.99996996, 0, 0, 0, 1, 99.09709, -0.7981279, 21.580147)
 
 [node name="Teleporter2" parent="NavigationRegion3D" instance=ExtResource("12_lc2xo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.453339, -0.41186905, 36.23578)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.22493, -0.41186905, -19.065796)
+
+[node name="Bomb" parent="NavigationRegion3D" instance=ExtResource("14_215e1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 107.36119, 0.7125912, -30.490622)
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -288,4 +301,27 @@ offset_right = 1915.0
 offset_bottom = 1083.0
 color = Color(1, 0.019607844, 0.019607844, 0.29411766)
 
+[node name="Message" type="Label" parent="UI"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 3.9620001
+anchor_bottom = 3.2870002
+offset_left = 480.0
+offset_top = 913.0
+offset_right = 1316.52
+offset_bottom = 921.52
+grow_horizontal = 2
+grow_vertical = 0
+text = "Bomb activated! Run to a teleporter"
+label_settings = SubResource("LabelSettings_7sc4i")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[connection signal="bomb_activated" from="Player" to="." method="_on_player_bomb_activated"]
 [connection signal="player_hit" from="Player" to="." method="_on_player_player_hit"]
+[connection signal="teleporter_activated" from="Player" to="." method="_on_player_teleporter_activated"]

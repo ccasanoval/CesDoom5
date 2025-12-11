@@ -18,8 +18,8 @@ var hasSetTheBomb = false
 
 var health = 100
 signal player_hit
-
-#TODO: Ride motorcycle or car... Touch -> Ride -> Change mode, change view...
+signal bomb_activated
+signal teleporter_activated
 
 #----------------------------------------------------------------------------------------
 func _physics_process(delta: float) -> void:
@@ -46,9 +46,9 @@ func _physics_process(delta: float) -> void:
 		var collider = rayTouch.get_collider()
 		if collider != null and collider.is_in_group("Teleporter"):
 			collider.teleport()
+			teleporter_activated.emit()
 		if collider != null and collider.is_in_group("Activate"):
-			#TODO: Change weapon by hand to let the user touch and activate with a menu?...
-			collider.activate()
+			bomb_activated.emit()
 	
 	#### KEYBOARD
 	# Get the input direction and handle the movement/deceleration.
@@ -82,8 +82,6 @@ func _physics_process(delta: float) -> void:
 
 #----------------------------------------------------------------------------------------
 #Fire shot animation: https://www.youtube.com/watch?v=ERFCutI6mqc
-#TODO: Discount number of available bullets
-#TODO: Add magazin picking to get more available bullets
 func fire():
 	fireCooldown = 0
 	flash.visible = true
@@ -100,4 +98,5 @@ func fire():
 func hit(damage):
 	health -= damage
 	print("Player hurt! H=", health)
-	emit_signal("player_hit")
+	#emit_signal("player_hit")
+	player_hit.emit()

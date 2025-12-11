@@ -13,9 +13,10 @@ var is_firing = false
 
 var health = 100
 
-const SPEED = 2.0
-const RANGE_PLAYER_AT_SIGHT = 10
-const RANGE_PLAYER_NOT_AT_SIGHT = 20
+#TODO: Adjustable difficulty
+const SPEED = 2.5
+const RANGE_PLAYER_AT_SIGHT = 15
+const RANGE_PLAYER_NOT_AT_SIGHT = 30
 const RANGE_PLAYER_IS_NEXT = 1.75
 
 func _ready() -> void:
@@ -46,7 +47,7 @@ func _process(delta: float) -> void:
 		not_sight = true
 
 	var is_firing_now = false
-	if !next and !is_firing and ray.is_colliding():
+	if timerHit.is_stopped() and !next and !is_firing and ray.is_colliding():
 		var collider = ray.get_collider()
 		if collider != null and collider.is_in_group("Player"):
 			is_firing_now = true
@@ -67,7 +68,6 @@ func _process(delta: float) -> void:
 			var next_nav_point = nav_agent.get_next_path_position()
 			velocity = (next_nav_point - global_position).normalized() * SPEED
 			look_at(next_nav_point, Vector3.UP)
-			#TODO: Shoot
 		"Throw_g":
 			#### HIT
 			look_at(player.global_position, Vector3.UP)
