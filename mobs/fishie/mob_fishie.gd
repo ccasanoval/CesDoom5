@@ -49,7 +49,6 @@ func _process(delta: float) -> void:
 	if !next and !is_firing and ray.is_colliding():
 		var collider = ray.get_collider()
 		if collider != null and collider.is_in_group("Player"):
-			#TODO: Look ant player
 			is_firing_now = true
 			fire()
 
@@ -94,14 +93,16 @@ func _on_timer_hit_timeout():
 func fire():
 	print("Fire!!")
 	is_firing = true
+	look_at(player.global_position)
 	timerFire.connect("timeout", _on_timer_fire_timeout)
 	timerFire.start(5)
 	# Create bullet
-	await get_tree().create_timer(0.3).timeout
+	await get_tree().create_timer(0.5).timeout
 	const BULLET_3D = preload("res://mobs/bullet/bullet_3d.tscn")
 	var new_bullet = BULLET_3D.instantiate()
 	$FireMarker.add_child(new_bullet)
 	new_bullet.global_transform = $FireMarker.global_transform
+	new_bullet.look_at(player.global_position)
 		
 func _on_timer_fire_timeout():
 	print("Fire ready again")
